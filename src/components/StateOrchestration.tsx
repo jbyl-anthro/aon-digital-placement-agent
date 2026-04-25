@@ -45,7 +45,6 @@ export default function StateOrchestration({ onNext, onLineStreamed }: StateOrch
     streamLines();
   }, [streamLines]);
 
-  // Auto-scroll the activity stream
   useEffect(() => {
     if (streamRef.current) {
       streamRef.current.scrollTop = streamRef.current.scrollHeight;
@@ -56,43 +55,44 @@ export default function StateOrchestration({ onNext, onLineStreamed }: StateOrch
 
   return (
     <div className="animate-fade-in">
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-aon-navy">Agent Orchestration</h1>
-        <p className="text-sm text-gray-500 mt-1">
+      <div className="mb-[2.4rem]">
+        <div className="text-[1.2rem] uppercase tracking-[0.15em] text-aon-teal font-medium mb-[0.8rem]">Step 2</div>
+        <h1 className="text-[3.2rem] leading-[3.6rem] font-display font-medium text-aon-navy tracking-[-0.02em]">Agent Orchestration</h1>
+        <p className="text-[1.4rem] text-aon-gray-02 mt-[0.8rem]">
           Processing iRobot Corporation renewal — orchestrator delegating to subagents
         </p>
       </div>
 
       {/* Graph */}
-      <div className="bg-aon-bg rounded-xl p-4 mb-6 border border-gray-100">
+      <div className="bg-aon-gray-08 rounded-[0.8rem] p-[1.6rem] mb-[2.4rem] border border-aon-gray-06">
         <OrchestrationGraph activeAgent={activeAgent} activeTool={activeTool} />
       </div>
 
       {/* Activity Stream */}
-      <div className="bg-gray-950 rounded-xl p-4 mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <div className={`w-2 h-2 rounded-full ${done ? "bg-emerald-400" : "bg-aon-red animate-pulse"}`} />
-          <span className="text-[10px] uppercase tracking-widest text-gray-400">
+      <div className="bg-aon-navy rounded-[0.8rem] p-[2rem] mb-[2.4rem]">
+        <div className="flex items-center gap-[0.8rem] mb-[1.2rem]">
+          <div className={`w-[0.6rem] h-[0.6rem] rounded-full ${done ? "bg-aon-success" : "bg-aon-red animate-pulse"}`} />
+          <span className="text-[1rem] uppercase tracking-[0.15em] text-white/40 font-medium">
             {done ? "Execution Complete" : "Live Execution Log"}
           </span>
         </div>
         <div
           ref={streamRef}
-          className="h-48 overflow-y-auto activity-stream space-y-1"
+          className="h-[20rem] overflow-y-auto activity-stream space-y-[0.4rem]"
         >
           {visibleLines.map((line, i) => (
-            <div key={i} className="animate-slide-in font-mono text-[12px] leading-relaxed">
-              <span className="text-gray-600">[{line.timestamp}]</span>{" "}
-              <span className="font-medium" style={{ color: agentColors[line.agent] || "#94a3b8" }}>
+            <div key={i} className="animate-slide-in font-mono text-[1.1rem] leading-[1.8rem]">
+              <span className="text-white/25">[{line.timestamp}]</span>{" "}
+              <span className="font-medium" style={{ color: agentColors[line.agent] || "#919a9f" }}>
                 {line.agent}:
               </span>{" "}
-              <span className="text-gray-300">{line.action}</span>
+              <span className="text-white/70">{line.action}</span>
             </div>
           ))}
           {!done && (
-            <div className="flex items-center gap-1.5 mt-1">
-              <div className="w-1.5 h-1.5 bg-aon-red rounded-full animate-pulse" />
-              <span className="text-gray-600 text-[11px] font-mono">processing…</span>
+            <div className="flex items-center gap-[0.6rem] mt-[0.4rem]">
+              <div className="w-[0.5rem] h-[0.5rem] bg-aon-red rounded-full animate-pulse" />
+              <span className="text-white/25 text-[1rem] font-mono">processing…</span>
             </div>
           )}
         </div>
@@ -102,12 +102,12 @@ export default function StateOrchestration({ onNext, onLineStreamed }: StateOrch
       {done && (
         <button
           onClick={onNext}
-          className="bg-aon-navy text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-aon-navy/90 transition-colors flex items-center gap-2 animate-fade-in"
+          className="bg-aon-red text-white px-[2.4rem] py-[1.6rem] rounded-[0.4rem] text-[1.4rem] font-medium hover:bg-[#d00015] transition-colors flex items-center gap-[0.8rem] border border-aon-red animate-fade-in"
         >
+          Review Recommendation
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M4 8H12M12 8L9 5M12 8L9 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          Review Recommendation
         </button>
       )}
     </div>

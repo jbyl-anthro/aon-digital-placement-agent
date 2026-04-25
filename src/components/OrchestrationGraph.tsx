@@ -25,7 +25,6 @@ const subagents: SubagentDef[] = [
 
 const orchestratorPos = { cx: 275, cy: 200 };
 
-// Tool positions relative to their subagent
 function getToolPositions(sa: SubagentDef): { label: string; cx: number; cy: number }[] {
   const dx = sa.cx - orchestratorPos.cx;
   const dy = sa.cy - orchestratorPos.cy;
@@ -52,7 +51,7 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
   }, []);
 
   return (
-    <svg viewBox="0 0 550 420" className="w-full max-w-2xl mx-auto" style={{ height: 340 }}>
+    <svg viewBox="0 0 550 420" className="w-full max-w-[56rem] mx-auto" style={{ height: 340 }}>
       {/* Connections: Orchestrator → Subagents */}
       {subagents.map((sa) => {
         const isActive = activeAgent === sa.id || activeAgent === "Orchestrator";
@@ -63,10 +62,10 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
             y1={orchestratorPos.cy}
             x2={sa.cx}
             y2={sa.cy}
-            stroke={isActive ? "#002B49" : "#e2e8f0"}
-            strokeWidth={isActive ? 2 : 1.5}
+            stroke={isActive ? "#262836" : "#cddbde"}
+            strokeWidth={isActive ? 2 : 1}
             className={isActive ? "flow-line" : ""}
-            opacity={isActive ? 1 : 0.4}
+            opacity={isActive ? 1 : 0.5}
           />
         );
       })}
@@ -83,7 +82,7 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
               y1={sa.cy}
               x2={tool.cx}
               y2={tool.cy}
-              stroke={isActive ? agentColors[group.agent] || "#64748b" : "#e2e8f0"}
+              stroke={isActive ? agentColors[group.agent] || "#78838b" : "#cddbde"}
               strokeWidth={isActive ? 2 : 1}
               className={isActive ? "flow-line" : ""}
               opacity={isActive ? 1 : 0.3}
@@ -103,9 +102,9 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
                 y={tool.cy - 12}
                 width={96}
                 height={24}
-                rx={4}
-                fill={isActive ? (agentColors[group.agent] || "#64748b") : "#f1f5f9"}
-                stroke={isActive ? (agentColors[group.agent] || "#64748b") : "#e2e8f0"}
+                rx={3}
+                fill={isActive ? (agentColors[group.agent] || "#78838b") : "#f9fcfc"}
+                stroke={isActive ? (agentColors[group.agent] || "#78838b") : "#cddbde"}
                 strokeWidth={1}
                 className={isActive ? "animate-glow-pulse" : ""}
               />
@@ -114,7 +113,7 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
                 y={tool.cy + 3.5}
                 textAnchor="middle"
                 className="text-[8px] font-mono"
-                fill={isActive ? "white" : "#94a3b8"}
+                fill={isActive ? "white" : "#919a9f"}
               >
                 {tool.label}
               </text>
@@ -126,7 +125,7 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
       {/* Subagent nodes */}
       {subagents.map((sa) => {
         const isActive = activeAgent === sa.id;
-        const color = agentColors[sa.id] || "#64748b";
+        const color = agentColors[sa.id] || "#78838b";
         return (
           <g key={sa.id}>
             <circle
@@ -134,8 +133,8 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
               cy={sa.cy}
               r={32}
               fill={isActive ? color : "white"}
-              stroke={isActive ? color : "#e2e8f0"}
-              strokeWidth={isActive ? 2.5 : 1.5}
+              stroke={isActive ? color : "#cddbde"}
+              strokeWidth={isActive ? 2 : 1}
               className={isActive ? "animate-glow-pulse" : ""}
             />
             <text
@@ -143,7 +142,7 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
               y={sa.cy - 3}
               textAnchor="middle"
               className="text-[9px] font-medium"
-              fill={isActive ? "white" : "#334155"}
+              fill={isActive ? "white" : "#262836"}
             >
               {sa.label.split(" ")[0]}
             </text>
@@ -152,7 +151,7 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
               y={sa.cy + 9}
               textAnchor="middle"
               className="text-[9px] font-medium"
-              fill={isActive ? "white" : "#334155"}
+              fill={isActive ? "white" : "#262836"}
             >
               {sa.label.split(" ").slice(1).join(" ")}
             </text>
@@ -165,16 +164,16 @@ export default function OrchestrationGraph({ activeAgent, activeTool }: Orchestr
         cx={orchestratorPos.cx}
         cy={orchestratorPos.cy}
         r={42}
-        fill={activeAgent ? "#002B49" : "white"}
-        stroke="#002B49"
-        strokeWidth={2.5}
+        fill={activeAgent ? "#262836" : "white"}
+        stroke="#262836"
+        strokeWidth={2}
       />
       <text
         x={orchestratorPos.cx}
         y={orchestratorPos.cy + 4}
         textAnchor="middle"
         className="text-[11px] font-semibold"
-        fill={activeAgent ? "white" : "#002B49"}
+        fill={activeAgent ? "white" : "#262836"}
       >
         Orchestrator
       </text>

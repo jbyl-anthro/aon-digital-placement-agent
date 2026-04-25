@@ -36,9 +36,9 @@ export const activityLog: ActivityLine[] = [
 ];
 
 export const agentColors: Record<string, string> = {
-  "Orchestrator": "#002B49",
-  "Quote Parser": "#1a6b8a",
-  "Placement Analyst": "#2d7d4f",
-  "RSR Generator": "#7c5bbf",
-  "Compliance Checker": "#b8860b",
+  "Orchestrator": "#262836",
+  "Quote Parser": "#007585",
+  "Placement Analyst": "#12a88a",
+  "RSR Generator": "#f25d00",
+  "Compliance Checker": "#29b0c3",
 };
