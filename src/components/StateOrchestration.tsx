@@ -55,33 +55,33 @@ export default function StateOrchestration({ onNext, onLineStreamed }: StateOrch
 
   return (
     <div className="animate-fade-in">
-      <div className="mb-[2.4rem]">
-        <div className="text-[1.2rem] uppercase tracking-[0.15em] text-aon-teal font-medium mb-[0.8rem]">Step 2</div>
-        <h1 className="text-[3.2rem] leading-[3.6rem] font-display font-medium text-aon-navy tracking-[-0.02em]">Agent Orchestration</h1>
-        <p className="text-[1.4rem] text-aon-gray-02 mt-[0.8rem]">
+      <div className="mb-6">
+        <div className="text-xs uppercase tracking-[0.15em] text-aon-teal font-medium mb-1">Step 2</div>
+        <h1 className="text-3xl font-display font-medium text-aon-navy tracking-tight">Agent Orchestration</h1>
+        <p className="text-sm text-aon-gray-02 mt-1">
           Processing iRobot Corporation renewal — orchestrator delegating to subagents
         </p>
       </div>
 
       {/* Graph */}
-      <div className="bg-aon-gray-08 rounded-[0.8rem] p-[1.6rem] mb-[2.4rem] border border-aon-gray-06">
+      <div className="bg-aon-gray-08 rounded-lg p-4 mb-6 border border-aon-gray-06">
         <OrchestrationGraph activeAgent={activeAgent} activeTool={activeTool} />
       </div>
 
       {/* Activity Stream */}
-      <div className="bg-aon-navy rounded-[0.8rem] p-[2rem] mb-[2.4rem]">
-        <div className="flex items-center gap-[0.8rem] mb-[1.2rem]">
-          <div className={`w-[0.6rem] h-[0.6rem] rounded-full ${done ? "bg-aon-success" : "bg-aon-red animate-pulse"}`} />
-          <span className="text-[1rem] uppercase tracking-[0.15em] text-white/40 font-medium">
+      <div className="bg-aon-navy rounded-lg p-5 mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <div className={`w-1.5 h-1.5 rounded-full ${done ? "bg-aon-success" : "bg-aon-red animate-pulse"}`} />
+          <span className="text-[10px] uppercase tracking-[0.15em] text-white/40 font-medium">
             {done ? "Execution Complete" : "Live Execution Log"}
           </span>
         </div>
         <div
           ref={streamRef}
-          className="h-[20rem] overflow-y-auto activity-stream space-y-[0.4rem]"
+          className="h-48 overflow-y-auto activity-stream space-y-1"
         >
           {visibleLines.map((line, i) => (
-            <div key={i} className="animate-slide-in font-mono text-[1.1rem] leading-[1.8rem]">
+            <div key={i} className="animate-slide-in font-mono text-[12px] leading-relaxed">
               <span className="text-white/25">[{line.timestamp}]</span>{" "}
               <span className="font-medium" style={{ color: agentColors[line.agent] || "#919a9f" }}>
                 {line.agent}:
@@ -90,9 +90,9 @@ export default function StateOrchestration({ onNext, onLineStreamed }: StateOrch
             </div>
           ))}
           {!done && (
-            <div className="flex items-center gap-[0.6rem] mt-[0.4rem]">
-              <div className="w-[0.5rem] h-[0.5rem] bg-aon-red rounded-full animate-pulse" />
-              <span className="text-white/25 text-[1rem] font-mono">processing…</span>
+            <div className="flex items-center gap-1.5 mt-1">
+              <div className="w-1 h-1 bg-aon-red rounded-full animate-pulse" />
+              <span className="text-white/25 text-[11px] font-mono">processing…</span>
             </div>
           )}
         </div>
@@ -102,7 +102,7 @@ export default function StateOrchestration({ onNext, onLineStreamed }: StateOrch
       {done && (
         <button
           onClick={onNext}
-          className="bg-aon-red text-white px-[2.4rem] py-[1.6rem] rounded-[0.4rem] text-[1.4rem] font-medium hover:bg-[#d00015] transition-colors flex items-center gap-[0.8rem] border border-aon-red animate-fade-in"
+          className="bg-aon-red text-white px-6 py-3 rounded text-sm font-medium hover:bg-[#d00015] transition-colors inline-flex items-center gap-2 border border-aon-red animate-fade-in"
         >
           Review Recommendation
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
